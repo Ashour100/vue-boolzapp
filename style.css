@@ -1,0 +1,13 @@
+.userTaskbar i{
+    color: grey;
+    font-size: larger;
+    opacity: 60%;
+}
+.logo-notif{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 2.5rem;
+    font-size: larger;
+}

@@ -34,7 +34,7 @@
                 <div class="col-5 bg-white p-0">
                     <div class="userTaskbar bg-light d-flex justify-content-between">
                         <div class="userInfo w-25 p-2">
-                            <img class="userImgS rounded-circle" src="img/default-user-image.png" alt="">
+                            <img class="userImgS rounded-circle" src="img/avatar_io.jpg" alt="">
                             <span>Sofia</span>
                         </div>
                         <div class="options d-flex justify-content-around align-items-center">
@@ -64,10 +64,10 @@
                                     <img class="userImg rounded-circle me-3" :src="`img/avatar${element.avatar}.jpg`" alt="">
                                 <div class="details">
                                     <h6 class="m-0">{{element.name}}</h6>
-                                    <span class="text-secondary smallText opacity-75">Ultimo messaggio inviato</span>
+                                    <span class="text-secondary smallText opacity-75">{{element.messages[element.messages.length-1].message}}</span>
                                 </div>
                             </div>
-                            <span class="text-secondary chatTime opacity-75">12:00</span>
+                            <span class="text-secondary chatTime opacity-75">{{element.messages[element.messages.length-1].time}}</span>
                         </div>
                     </div>
                 </div>

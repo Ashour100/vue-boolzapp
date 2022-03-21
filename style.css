@@ -38,12 +38,12 @@ i{
     bottom: 3.4rem;
     right: .4rem;
 }
-.activechat{
-    background-color: rgba(90, 87, 87, 0.123);
-}
 .chats{
     overflow-y: scroll;
     height: 67.5vh;
+}
+.chat:hover{
+    background-color: rgba(90, 87, 87, 0.123);
 }
 .options{
     width: 6rem;

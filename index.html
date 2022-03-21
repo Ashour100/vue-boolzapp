@@ -59,11 +59,11 @@
                         </div>
                     </div>
                     <div class="chats">
-                        <div class="chat p-2 d-flex position-relative activechat">
+                        <div v-for="element in contacts" class="chat p-2 d-flex position-relative">
                             <div class="left d-flex">
-                                    <img class="userImg rounded-circle me-3" src="img/avatar_1.jpg" alt="">
+                                    <img class="userImg rounded-circle me-3" :src="`img/avatar${element.avatar}.jpg`" alt="">
                                 <div class="details">
-                                    <h6 class="m-0">Michele</h6>
+                                    <h6 class="m-0">{{element.name}}</h6>
                                     <span class="text-secondary smallText opacity-75">Ultimo messaggio inviato</span>
                                 </div>
                             </div>

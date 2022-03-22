@@ -187,11 +187,34 @@ const app= new Vue({
                 ],
             }
         ],
-        activeChatIndex:"0"
+        activeChatIndex:"0",
+        newMessage:""
     },
     methods:{
         activeChat: function(index){
             this.activeChatIndex=index;
+        },
+        addNewMessage:function(){
+            if(this.newMessage.trim()!=""){
+                this.contacts[this.activeChatIndex].messages.push({
+                    date: 'whatever',
+                    message: this.newMessage,
+                    status: 'sent',
+                    time:'New'
+                });
+                this.newMessage="";
+                setTimeout(this.autoResponse,1000)
+            }
+            else
+                alert("You can't send an empty message");
+        },
+        autoResponse:function(){
+            this.contacts[this.activeChatIndex].messages.push({
+                date: 'whatever',
+                message: 'Ok',
+                status: 'received',
+                time:'New'
+            });
         }
     }
 });

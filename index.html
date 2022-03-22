@@ -94,7 +94,7 @@
                     </div>
                     <div class="bottBar p-2 bg-light d-flex align-items-center justify-content-between">
                         <button class="border-0 px-3 bg-light pt-1"><i class="fa-regular fa-face-smile fs-5"></i></button>
-                        <input type="text" class="form-control border-0 shadow-none" id="input" placeholder="Scrivi un messaggio">
+                        <input v-model="newMessage" v-on:keydown.enter="addNewMessage" type="text" class="form-control border-0 shadow-none" id="input" placeholder="Scrivi un messaggio">
                         <button class="border-0 px-4 bg-light pt-1"><i class="fa-solid fa-microphone fs-5"></i></button>
                     </div>
                 </div>

@@ -59,7 +59,7 @@
                         </div>
                     </div>
                     <div class="chats">
-                        <div v-for="element in contacts" class="chat p-2 d-flex position-relative">
+                        <div v-for="(element,index) in contacts" class="chat p-2 d-flex position-relative" :class="(activeChatIndex==index)?'activeElement':''" @click="activeChat(index)">
                             <div class="left d-flex">
                                     <img class="userImg rounded-circle me-3" :src="`img/avatar${element.avatar}.jpg`" alt="">
                                 <div class="details">
@@ -87,17 +87,9 @@
                         </div>
                     </div>
                     <div class="openedChat px-5 py-3 d-flex flex-column justify-content-start align-items-start gap-2">
-                        <div class="sentMessage w-50 position-relative px-2 pt-2 pb-3 rounded-3">
-                            <span class="fs-6 me-3">Hai portato a spasso il cane?</span>
-                            <span class="chatTime text-secondary opacity-50">15:30</span>
-                        </div>
-                        <div class="sentMessage w-50 position-relative px-2 pt-2 pb-3 rounded-3">
-                            <span class="fs-6 me-3">Ricordati di stendere i panni</span>
-                            <span class="chatTime text-secondary opacity-50">15:50</span>
-                        </div>
-                        <div class="bg-white w-50 position-relative px-2 pt-2 pb-3 rounded-3">
-                            <span class="fs-6 me-3">Ricordati di stendere i panni</span>
-                            <span class="chatTime text-secondary opacity-50">15:50</span>
+                        <div v-for="message in contacts[activeChatIndex].messages" class="w-50 position-relative px-2 pt-2 pb-3 rounded-3" :class="(message.status=='sent')?'sentMessage':'bg-white'">
+                            <span class="fs-6 me-3">{{message.message}}</span>
+                            <span class="chatTime text-secondary opacity-50">{{message.time}}</span>
                         </div>
                     </div>
                     <div class="bottBar p-2 bg-light d-flex align-items-center justify-content-between">

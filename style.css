@@ -45,6 +45,9 @@ i{
 .chat:hover{
     background-color: rgba(90, 87, 87, 0.123);
 }
+.activeElement{
+    background-color: rgba(90, 87, 87, 0.123);
+}
 .options{
     width: 6rem;
 }

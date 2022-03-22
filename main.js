@@ -187,12 +187,11 @@ const app= new Vue({
                 ],
             }
         ],
-        
+        activeChatIndex:"0"
     },
     methods:{
-        // test: function(){
-        //     for(element in this.contacts)
-        //     console.log(element.messages.lenght);
-        // }
+        activeChat: function(index){
+            this.activeChatIndex=index;
+        }
     }
 });

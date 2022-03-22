@@ -66,3 +66,21 @@ i{
 .bottBar i{
     color: rgb(46, 45, 45);
 }
+.drop-down-arrow{
+    display: none;
+    font-size: small;
+    cursor: pointer;
+}
+.message:hover .drop-down-arrow{
+    display: inline-block;
+}
+.drop-down-list{
+    background-color: white;
+    right: 0;
+    top: 1.7rem;
+    font-size: small;
+    z-index: 5;
+}
+.drop-down-list span{
+    cursor: pointer;
+}

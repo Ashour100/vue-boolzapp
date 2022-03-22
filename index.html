@@ -87,9 +87,13 @@
                         </div>
                     </div>
                     <div class="openedChat px-5 py-3 d-flex flex-column justify-content-start align-items-start gap-2">
-                        <div v-for="message in contacts[activeChatIndex].messages" class="w-50 position-relative px-2 pt-2 pb-3 rounded-3" :class="(message.status=='sent')?'sentMessage':'bg-white'">
+                        <div v-for="(message,index) in contacts[activeChatIndex].messages" class="w-50 position-relative px-2 pt-2 pb-3 rounded-3 message" :class="(message.status=='sent')?'sentMessage':'bg-white'">
                             <span class="fs-6 me-3">{{message.message}}</span>
                             <span class="chatTime text-secondary opacity-50">{{message.time}}</span>
+                            <i @click="click(index)" class="fa-solid fa-angle-down drop-down-arrow float-end"></i>
+                            <div v-if="(message.clicked==true)" class="drop-down-list position-absolute p-3 shadow rounded">
+                                <span @click="deleteMessage(index)">Delete message</span>
+                            </div>
                         </div>
                     </div>
                     <div class="bottBar p-2 bg-light d-flex align-items-center justify-content-between">

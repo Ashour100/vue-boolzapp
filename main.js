@@ -1,4 +1,4 @@
-// Lo Scopo del bonus: Cambiare il modo in cui la lista viene ordinata
+// per il momento puoi aggiornare il search engine con il tasto enter
 
 const app= new Vue({
     el:'#app',
@@ -188,33 +188,82 @@ const app= new Vue({
             }
         ],
         activeChatIndex:"0",
-        newMessage:""
+        newMessage:"",
+        search:"",
+        now :new Date(),
     },
     methods:{
         activeChat: function(index){
             this.activeChatIndex=index;
         },
         addNewMessage:function(){
+            now=this.now;
+            let date = now.getDate()+'/'+(now.getMonth()+1)+'/'+now.getFullYear();
+            let time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+            let dateTime = date+' '+time;
             if(this.newMessage.trim()!=""){
                 this.contacts[this.activeChatIndex].messages.push({
-                    date: 'whatever',
+                    date: dateTime,
                     message: this.newMessage,
                     status: 'sent',
-                    time:'New'
+                    time: now.getHours()+":"+now.getMinutes()
                 });
                 this.newMessage="";
                 setTimeout(this.autoResponse,1000)
             }
             else
                 alert("You can't send an empty message");
+                console.log(dateTime)
         },
         autoResponse:function(){
             this.contacts[this.activeChatIndex].messages.push({
-                date: 'whatever',
+                date: this.dateTime,
                 message: 'Ok',
                 status: 'received',
-                time:'New'
+                time: now.getHours()+":"+now.getMinutes()
             });
+        },
+        searchEngineOn:function(){
+            if(this.search!=""){
+                for(let i=0;i<this.contacts.length;i++){
+                    this.contacts[i].visible=false;
+                }
+            }
+            if(this.search==""){
+                for(let i=0;i<this.contacts.length;i++){
+                    this.contacts[i].visible=true;
+                }
+            }
+            let arrSearch=this.search.toLowerCase().split("");
+            for(let i=0;i<this.contacts.length;i++){
+                let tempName=this.contacts[i].name.toLowerCase().split("");
+                let arrControllo=[];
+                let controlloFinale;
+                for(let a=0;a<arrSearch.length;a++){
+                    if(arrSearch[a]==tempName[a])
+                        arrControllo[a]=true;
+                    else
+                        arrControllo[a]=false;
+                }
+                for(let c=0;c<arrControllo.length;c++){
+                    if(arrControllo[c])
+                        controlloFinale=true;
+                    else{
+                        console.log("Sorry");
+                        controlloFinale=false;
+                        break;
+                    }
+                }
+                console.log(tempName);
+                console.log(arrControllo);
+                if(controlloFinale==true){
+                    this.contacts[i].visible=true;
+                }
+            }
         }
-    }
+    },
+    // updated() {
+    // Va in loop infinito, Quindi per il momento puoi aggiornare il search engine con il tasto enter
+    //     this.searchEngineOn();
+    // }
 });

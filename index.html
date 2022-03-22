@@ -55,11 +55,11 @@
                     <div class="searchGroup p-2 bg-light">
                         <div class="input-group flex-nowrap">
                             <span class="input-group-text bg-white border-0 text-secondary" id="addon-wrapping"><i class="fa-solid fa-magnifying-glass opacity-50 px-2"></i></span>
-                            <input type="text" class="form-control border-0 shadow-none" placeholder="Cerca o inizia un nuova chat" aria-label="search" aria-describedby="addon-wrapping">
+                            <input v-model="search" @click="searchEngineOn" v-on:keydown.enter="searchEngineOn" type="text" class="form-control border-0 shadow-none" placeholder="Cerca o inizia un nuova chat" aria-label="search" aria-describedby="addon-wrapping">
                         </div>
                     </div>
                     <div class="chats">
-                        <div v-for="(element,index) in contacts" class="chat p-2 d-flex position-relative" :class="(activeChatIndex==index)?'activeElement':''" @click="activeChat(index)">
+                        <div v-for="(element,index) in contacts" v-if="element.visible" class="chat p-2 d-flex position-relative" :class="(activeChatIndex==index)?'activeElement':''" @click="activeChat(index)">
                             <div class="left d-flex">
                                     <img class="userImg rounded-circle me-3" :src="`img/avatar${element.avatar}.jpg`" alt="">
                                 <div class="details">
@@ -72,12 +72,12 @@
                     </div>
                 </div>
                 <div class="col-7 bg-primary p-0">
-                    <div class="userTaskbar bg-light d-flex justify-content-between p-2 border-start border-1 border-secondary">
+                    <div v-for="(element,index) in contacts" v-if="(activeChatIndex==index)" class="userTaskbar bg-light d-flex justify-content-between p-2 border-start border-1 border-secondary">
                         <div class="left d-flex align-items-center">
-                            <img class="userImgS rounded-circle me-3" src="img/avatar_1.jpg" alt="">
+                            <img class="userImgS rounded-circle me-3" :src="`img/avatar${element.avatar}.jpg`" alt="">
                                 <div class="details">
-                                    <h6 class="m-0">Michele</h6>
-                                    <span class="text-secondary smallText opacity-75">Ultimo accesso oggi alle 12:00</span>
+                                    <h6 class="m-0">{{element.name}}</h6>
+                                    <span class="text-secondary smallText opacity-75">Ultimo accesso oggi alle {{element.messages[element.messages.length-1].time}}</span>
                                 </div>
                         </div>
                         <div class="options right d-flex justify-content-around align-items-center ">

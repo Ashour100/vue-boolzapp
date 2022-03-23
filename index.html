@@ -29,10 +29,11 @@
         <div class="greenBar"></div>
     </div>
     <main class="position-relative">
-        <div class="container px-5 py-3" id="app">
-            <div class="row px-5">
-                <div class="col-5 bg-white p-0">
-                    <div class="userTaskbar bg-light d-flex justify-content-between">
+        <div class="container p-3" id="app">
+            <div v-if="(darkMode)" class="darkBackground position-absolute"></div>
+            <div class="row">
+                <div class="col-4 p-0" :class="(darkMode)?'bg-dark':'bg-white'">
+                    <div class="userTaskbar d-flex justify-content-between" :class="(darkMode)?'bg-dark text-white':'bg-light'">
                         <div class="userInfo w-25 p-2">
                             <img class="userImgS rounded-circle" src="img/avatar_io.jpg" alt="">
                             <span>Sofia</span>
@@ -43,63 +44,68 @@
                             <i class="fa-solid fa-ellipsis-vertical"></i>
                         </div>
                     </div>  
-                    <div class="notification bg-info p-3 d-flex">
-                        <div class="bg-light logo-notif me-2">
-                            <i class="fa-solid fa-bell-slash text-info opacity-75"></i>
+                    <div class="notification px-3 py-4 d-flex" :class="(darkMode)?'bg-secondary bg-opacity-10 text-white':'bg-info'">
+                        <div class="logo-notif me-2" :class="(darkMode)?'bg-info':'bg-light'">
+                            <i class="fa-solid fa-bell-slash" :class="(darkMode)?'text-black bg-opacity-10':'text-info'"></i>
                         </div>
                         <div class="text">
                             <h6 class="m-0">Ricevi notifiche di nuovi messaggi</h6>
-                            <a href="#" class="text-secondary smallText">Attiva notifiche desktop</a>
+                            <a href="#" class="text-secondary smallText text-decoration-none">Attiva notifiche desktop</a>
                         </div>
                     </div>
-                    <div class="searchGroup p-2 bg-light">
+                    <div class="searchGroup p-2" :class="(darkMode)?'bg-dark':'bg-light'">
                         <div class="input-group flex-nowrap">
-                            <span class="input-group-text bg-white border-0 text-secondary" id="addon-wrapping"><i class="fa-solid fa-magnifying-glass opacity-50 px-2"></i></span>
-                            <input v-model="search" @click="searchEngineOn" v-on:keydown.enter="searchEngineOn" type="text" class="form-control border-0 shadow-none" placeholder="Cerca o inizia un nuova chat" aria-label="search" aria-describedby="addon-wrapping">
+                            <span :class="(darkMode)?'bg-secondary bg-opacity-50':'bg-white'" class="input-group-text border-0" id="addon-wrapping"><i :class="(darkMode)?'text-dark':'text-secondary'" class="fa-solid fa-magnifying-glass opacity-50 px-2"></i></span>
+                            <input v-model="search" :class="(darkMode)?'bg-secondary bg-opacity-50':'bg-white'" @click="searchEngineOn" v-on:keydown.enter="searchEngineOn" type="text" class="form-control border-0 shadow-none ms-0" placeholder="Cerca o inizia un nuova chat" aria-label="search">
                         </div>
                     </div>
-                    <div class="chats">
+                    <div class="chats" :class="(darkMode)?'bg-dark text-white darkCoolScrollbar':'coolScrollbar'">
                         <div v-for="(element,index) in contacts" v-if="element.visible" class="chat p-2 d-flex position-relative" :class="(activeChatIndex==index)?'activeElement':''" @click="activeChat(index)">
                             <div class="left d-flex">
                                     <img class="userImg rounded-circle me-3" :src="`img/avatar${element.avatar}.jpg`" alt="">
                                 <div class="details">
                                     <h6 class="m-0">{{element.name}}</h6>
-                                    <span class="text-secondary smallText opacity-75">{{element.messages[element.messages.length-1].message}}</span>
+                                    <span class="smallText opacity-75" :class="(darkMode)?'text-white':'text-secondary'">{{element.messages[element.messages.length-1].message}}</span>
                                 </div>
                             </div>
-                            <span class="text-secondary chatTime opacity-75">{{element.messages[element.messages.length-1].time}}</span>
+                            <span class="chatTime opacity-75" :class="(darkMode)?'text-white':'text-secondary'">{{element.messages[element.messages.length-1].time}}</span>
                         </div>
                     </div>
                 </div>
-                <div class="col-7 bg-primary p-0">
-                    <div v-for="(element,index) in contacts" v-if="(activeChatIndex==index)" class="userTaskbar bg-light d-flex justify-content-between p-2 border-start border-1 border-secondary">
+                <div class="col-8 bg-primary p-0">
+                    <div v-for="(element,index) in contacts" v-if="(activeChatIndex==index)" class="userTaskbar d-flex justify-content-between p-2 border-start border-1 ":class="(darkMode)?'bg-dark text-white border-dark':'bg-light border-light'">
                         <div class="left d-flex align-items-center">
                             <img class="userImgS rounded-circle me-3" :src="`img/avatar${element.avatar}.jpg`" alt="">
                                 <div class="details">
                                     <h6 class="m-0">{{element.name}}</h6>
-                                    <span class="text-secondary smallText opacity-75">Ultimo accesso oggi alle {{element.messages[element.messages.length-1].time}}</span>
+                                    <span class="smallText opacity-75" :class="(darkMode)?'text-white':'text-secondary'">Ultimo accesso oggi alle {{element.messages[element.messages.length-1].time}}</span>
                                 </div>
                         </div>
                         <div class="options right d-flex justify-content-around align-items-center ">
+                            <i @click="darkModeSwitch" v-if="(!darkMode)" class="fa-solid fa-moon"></i>
+                            <i @click="darkModeSwitch" v-if="(darkMode)" class="fa-solid fa-sun"></i>
                             <i class="fa-solid fa-magnifying-glass"></i>
                             <i class="fa-solid fa-paperclip"></i>
                             <i class="fa-solid fa-ellipsis-vertical"></i>
                         </div>
                     </div>
-                    <div class="openedChat px-5 py-3 d-flex flex-column justify-content-start align-items-start gap-2">
-                        <div v-for="(message,index) in contacts[activeChatIndex].messages" class="w-50 position-relative px-2 pt-2 pb-3 rounded-3 message" :class="(message.status=='sent')?'sentMessage':'bg-white'">
-                            <span class="fs-6 me-3">{{message.message}}</span>
-                            <span class="chatTime text-secondary opacity-50">{{message.time}}</span>
-                            <i @click="click(index)" class="fa-solid fa-angle-down drop-down-arrow float-end"></i>
-                            <div v-if="(message.clicked==true)" class="drop-down-list position-absolute p-3 shadow rounded">
-                                <span @click="deleteMessage(index)">Delete message</span>
+                    <div class="openedChat px-5 py-3 " :class="(darkMode)?'background2 darkCoolScrollbar':'background1 coolScrollbar'">
+                        <div class="messagesWrapper px-4 d-flex flex-column justify-content-start align-items-start gap-2 position-relative">
+                            <div v-for="(message,index) in contacts[activeChatIndex].messages" class="position-relative px-2 pt-2 pb-3 rounded-3 message" 
+                            :class="(darkMode)?(message.status=='sent')?'sentDarkMessage ms-auto':'recivedDarkMessage':(message.status=='sent')?'sentMessage ms-auto':'bg-white'">
+                                <span class="fs-6 me-3">{{message.message}}</span>
+                                <span class="chatTime opacity-50" :class="(darkMode)?'text-white':'text-secondary'">{{message.time}}</span>
+                                <i @click="click(index)" class="fa-solid fa-angle-down drop-down-arrow float-end"></i>
+                                <div v-if="(message.clicked==true)" class="drop-down-list position-absolute p-3 shadow rounded" :class="(darkMode)?'drop-down-list-dark':''">
+                                    <span @click="deleteMessage(index)">Delete message</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="bottBar p-2 bg-light d-flex align-items-center justify-content-between">
-                        <button class="border-0 px-3 bg-light pt-1"><i class="fa-regular fa-face-smile fs-5"></i></button>
-                        <input v-model="newMessage" v-on:keydown.enter="addNewMessage" type="text" class="form-control border-0 shadow-none" id="input" placeholder="Scrivi un messaggio">
-                        <button class="border-0 px-4 bg-light pt-1"><i class="fa-solid fa-microphone fs-5"></i></button>
+                    <div class="bottBar p-2 d-flex align-items-center justify-content-between" :class="(darkMode)?'bg-dark':'bg-light lightModei'">
+                        <button class="border-0 px-3 pt-1" :class="(darkMode)?'bg-dark':'bg-light'"><i class="fa-regular fa-face-smile fs-5 "></i></button>
+                        <input v-model="newMessage" v-on:keydown.enter="addNewMessage" type="text" class="form-control border-0 shadow-none" :class="(darkMode)?'bg-secondary bg-opacity-50 text-white':''" id="input" placeholder="Scrivi un messaggio">
+                        <button class="border-0 px-4 pt-1" :class="(darkMode)?'bg-dark':'bg-light'"><i class="fa-solid fa-microphone fs-5"></i></button>
                     </div>
                 </div>
             </div>

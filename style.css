@@ -1,20 +1,31 @@
 body{
     background-color: #dcdbd2;
 }
+.darkBackground{
+    height: 100vh;
+    width: 100vw;
+    left: 0;
+    top:0;
+    background-color: black;
+    z-index: 1;
+}
 .greenBar{
     height: 18vh;
     background-color: #055a52;
     z-index: 1;
 }
-main{
-    z-index: 2;
+.row{
+    position: relative;
+    z-index: 3;
+    border-radius: 200rem !important;
 }
-
 i{
     color: grey;
     font-size: larger;
-    opacity: 60%;
+    opacity: 70%;
+    cursor: pointer;
 }
+
 .logo-notif{
     width: 2.5rem;
     height: 2.5rem;
@@ -40,36 +51,55 @@ i{
 }
 .chats{
     overflow-y: scroll;
-    height: 67.5vh;
+    height: 65.2vh;
+    cursor: pointer;
 }
 .chat:hover{
-    background-color: rgba(90, 87, 87, 0.123);
+    background-color: rgba(138, 133, 133, 0.123);
 }
 .activeElement{
-    background-color: rgba(90, 87, 87, 0.123);
+    background-color: rgba(138, 133, 133, 0.123);
 }
 .options{
     width: 6rem;
 }
 .openedChat{
-    background-image: url('img/mine.jpg');
     height: 78vh;
     overflow-y: scroll;
+}
+.background1{
+    background-image: url('img/mine.jpg');
+}
+.background2{
+    background-image: url('img/mine3.jpg');
+    background-size: contain;
 }
 .openedChat .chatTime{
     bottom: 0.1rem;
 }
 .sentMessage{
     background-color: #d5f9ba;
-    margin-left: 17rem;
 }
-.bottBar i{
+.sentDarkMessage{
+    background-color: #005c4b;
+    margin-left: 17rem;
+    color: white;
+}
+.recivedDarkMessage{
+    background-color: rgb(26, 26, 26);
+    color: white;
+}
+.lightModei{
     color: rgb(46, 45, 45);
 }
 .drop-down-arrow{
     display: none;
     font-size: small;
     cursor: pointer;
+}
+.message{
+    min-width: 8rem;
+    max-width: 20rem;
 }
 .message:hover .drop-down-arrow{
     display: inline-block;
@@ -81,6 +111,40 @@ i{
     font-size: small;
     z-index: 5;
 }
+.drop-down-list-dark{
+    background-color: rgb(34, 34, 34);
+    color:white;
+}
 .drop-down-list span{
     cursor: pointer;
+}
+.modeButton{
+    right: 0;
+    top:0rem
+}
+
+
+
+
+.coolScrollbar::-webkit-scrollbar{
+    width: .4vw;
+}
+.coolScrollbar::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0);
+}
+.coolScrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(54, 54, 54, 0.226) ;
+    /* border-radius: 1rem; */
+    border: .2rem solid rgba(1, 0, 0, .01);
+}
+.darkCoolScrollbar::-webkit-scrollbar{
+    width: .4vw;
+}
+.darkCoolScrollbar::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0);
+}
+.darkCoolScrollbar::-webkit-scrollbar-thumb {
+    background-color: rgb(54, 54, 54) ;
+    /* border-radius: 1rem; */
+    border: .2rem solid rgba(1, 0, 0, .01);
 }

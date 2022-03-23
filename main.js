@@ -212,6 +212,7 @@ const app= new Vue({
         newMessage:"",
         search:"",
         now :new Date(),
+        darkMode:true
     },
     methods:{
         activeChat: function(index){
@@ -293,6 +294,9 @@ const app= new Vue({
             }
             else
             this.contacts[this.activeChatIndex].messages.splice(index,1);
+        },
+        darkModeSwitch:function(){
+            this.darkMode=!this.darkMode
         }
     },
     // updated() {

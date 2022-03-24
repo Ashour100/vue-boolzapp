@@ -1,5 +1,3 @@
-// per il momento puoi aggiornare il search engine con il tasto enter
-
 const app= new Vue({
     el:'#app',
     data:{
@@ -298,9 +296,5 @@ const app= new Vue({
         darkModeSwitch:function(){
             this.darkMode=!this.darkMode
         }
-    },
-    // updated() {
-    // Va in loop infinito, Quindi per il momento puoi aggiornare il search engine con il tasto enter
-    //     this.searchEngineOn();
-    // }
+    }
 });

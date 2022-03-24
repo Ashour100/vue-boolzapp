@@ -56,7 +56,7 @@
                     <div class="searchGroup p-2" :class="(darkMode)?'bg-dark':'bg-light'">
                         <div class="input-group flex-nowrap">
                             <span :class="(darkMode)?'bg-secondary bg-opacity-50':'bg-white'" class="input-group-text border-0" id="addon-wrapping"><i :class="(darkMode)?'text-dark':'text-secondary'" class="fa-solid fa-magnifying-glass opacity-50 px-2"></i></span>
-                            <input v-model="search" :class="(darkMode)?'bg-secondary bg-opacity-50':'bg-white'" @click="searchEngineOn" v-on:keydown.enter="searchEngineOn" type="text" class="form-control border-0 shadow-none ms-0" placeholder="Cerca o inizia un nuova chat" aria-label="search">
+                            <input v-model="search" :class="(darkMode)?'bg-secondary bg-opacity-50':'bg-white'" @keyup="searchEngineOn" @keydown="searchEngineOn" type="text" class="form-control border-0 shadow-none ms-0" placeholder="Cerca o inizia un nuova chat" aria-label="search">
                         </div>
                     </div>
                     <div class="chats" :class="(darkMode)?'bg-dark text-white darkCoolScrollbar':'coolScrollbar'">
